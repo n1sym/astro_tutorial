@@ -1,0 +1,35 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+import fs from "fs";
+import path from "path";
+
+const pageTitle = "nocdaily";
+
+export async function getStaticPaths() {
+  const jsonDirectory = path.join(process.cwd(), "src/data");
+  const fileNames = fs.readdirSync(jsonDirectory).map((filename) => {return filename.split(".")[0]})
+  const pages = []
+  fileNames.forEach((fileName) => {
+    const fullPath = path.join(jsonDirectory, fileName + ".json");
+    const fileContents = fs.readFileSync(fullPath, "utf8");
+    const json = JSON.parse(fileContents);
+    pages.push({ params: { daily: fileName}, props: {json} })
+  })
+  return pages;
+}
+
+const { daily } = Astro.params;
+const { json } = Astro.props;
+---
+
+<BaseLayout pageTitle={pageTitle}>
+  <h2>My awesome blog subtitle</h2>
+  <h3>{daily}</h3>
+  
+  {json.map((unit) => 
+    <h4>{unit.title}</h4>
+    <div class="py-4">comment</div>
+  )}
+  
+</BaseLayout>

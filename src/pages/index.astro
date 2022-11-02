@@ -1,15 +1,16 @@
 ---
+import fs from "fs";
+import path from "path";
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const pageTitle = "Home Page";
+const jsonDirectory = path.join(process.cwd(), "src/data");
+const fileNames = fs.readdirSync(jsonDirectory).map((filename) => {return filename.split(".")[0]})
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro S</h1>
-	</body>
-</html>
+<BaseLayout pageTitle={pageTitle}>
+  <h2>My awesome blog subtitle</h2>
+  <ul>
+    {fileNames.map((fileName) => <li><a href={"daily/" + fileName}>{fileName}</a></li>)}
+  </ul>
+</BaseLayout>
