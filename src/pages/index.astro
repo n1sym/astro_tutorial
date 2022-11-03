@@ -12,6 +12,12 @@ const fileNames = fs.readdirSync(jsonDirectory).map((filename) => {return filena
   <h2>My awesome blog subtitle</h2>
   <ul>
     {fileNames.map((fileName) => <li><a href={"daily/" + fileName}>{fileName}</a></li>)}
-    
   </ul>
+  <script src="https://utteranc.es/client.js"
+        repo="n1sym/astro_tutorial"
+        issue-term="pathname"
+        theme="github-light"
+        crossorigin="anonymous"
+        async>
+  </script>
 </BaseLayout>
