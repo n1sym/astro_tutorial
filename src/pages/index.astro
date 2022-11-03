@@ -12,5 +12,6 @@ const fileNames = fs.readdirSync(jsonDirectory).map((filename) => {return filena
   <h2>My awesome blog subtitle</h2>
   <ul>
     {fileNames.map((fileName) => <li><a href={"daily/" + fileName}>{fileName}</a></li>)}
+    
   </ul>
 </BaseLayout>

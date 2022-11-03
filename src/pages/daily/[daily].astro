@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import Accordion from '../../components/Accordion.svelte'
 
 import fs from "fs";
 import path from "path";
@@ -26,10 +27,9 @@ const { json } = Astro.props;
 <BaseLayout pageTitle={pageTitle}>
   <h2>My awesome blog subtitle</h2>
   <h3>{daily}</h3>
-  
   {json.map((unit) => 
     <h4>{unit.title}</h4>
-    <div class="py-4">comment</div>
+    <Accordion test={unit.id} client:load></Accordion>
   )}
   
 </BaseLayout>
